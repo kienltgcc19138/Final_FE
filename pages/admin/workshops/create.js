@@ -1,6 +1,6 @@
 import CustomLayout from "@/layouts/LayoutAnt";
 import { addWorkshopServie } from "@/services/adminService";
-import { Input } from "antd";
+import { Alert, Input, Spin } from "antd";
 import { useRouter } from "next/router";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useState } from "react";
@@ -30,7 +30,7 @@ export default function CreateWorkshop() {
     score: "",
     description: "",
   });
-
+  const [loadingSpin, setLoadingSpin] = useState(false);
   const [errors, setErrors] = useState({
     name: "",
     topic: "",
@@ -305,17 +305,27 @@ export default function CreateWorkshop() {
                 onChange={(info) => {
                   const { status, response } = info.file;
                   if (status === "done") {
+                    setLoadingSpin(false);
                     console.log(`${info.file} uploaded successfully`);
                     handleUpload(info.file);
+                    toast.success("Upload file success");
                     // Do something with the response data
                   } else if (status === "error") {
-                    message.error(`${info.file.name} upload failed.`);
+                    setLoadingSpin(false);
+                    toast.error(`${info.file.name} upload failed.`);
+                    // message.error(`${info.file.name} upload failed.`);
                     // Handle the error
+                  } else if (status == "uploading") {
+                    console.log("uploading");
+                    setLoadingSpin(true);
                   }
                 }}
               >
                 <Button icon={<UploadOutlined />}>Upload</Button>
               </Upload>
+              <Spin spinning={loadingSpin}>
+              
+              </Spin>
             </div>
             <div className="col-span-2">
               <div className="text-xs font-semibold mb-2">
