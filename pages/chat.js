@@ -1,7 +1,7 @@
 import useStomp from "@/hooks/Stomp";
 import Cookies from "js-cookie";
 import React, { useState, useEffect } from "react";
-const SOCKET_URL = "http://45.119.212.77:5021/ws-message";
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 const userId = Cookies.get("userId");
 
 const MyComponent = () => {

@@ -167,7 +167,7 @@ export default function ChatUser() {
                             >
                               <div
                                 className="cursor-pointer"
-                                onClick={() => sendMessage(ztbee?.description)}
+                                // onClick={() => sendMessage(ztbee?.description)}
                               >
                                 {" "}
                                 {ztbee?.description}
@@ -249,6 +249,7 @@ export default function ChatUser() {
                       value={message}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
+                          // console.log("message")
                           sendMessage(e.target.value);
                         }
                       }}
