@@ -249,7 +249,7 @@ export default function ChatUser() {
                       value={message}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                          // console.log("message")
+                          console.log("message")
                           sendMessage(e.target.value);
                         }
                       }}
